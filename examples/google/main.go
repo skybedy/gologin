@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/dghubble/gologin/v2"
 	"github.com/dghubble/gologin/v2/google"
@@ -38,14 +37,16 @@ func New(config *Config) *http.ServeMux {
 	mux.HandleFunc("/logout", logoutHandler)
 	// 1. Register Login and Callback handlers
 	oauth2Config := &oauth2.Config{
-		ClientID:     config.ClientID,
-		ClientSecret: config.ClientSecret,
+		ClientID:     "990650209650-tidphg8cnge229cd3888st5jhkfk1g73.apps.googleusercontent.com",
+		ClientSecret: "-sosFxmYeGyU-Pe6QutUvGlo",
 		RedirectURL:  "http://localhost:8080/google/callback",
 		Endpoint:     googleOAuth2.Endpoint,
 		Scopes:       []string{"profile", "email"},
 	}
 	// state param cookies require HTTPS by default; disable for localhost development
+
 	stateConfig := gologin.DebugOnlyCookieConfig
+
 	mux.Handle("/google/login", google.StateHandler(stateConfig, google.LoginHandler(oauth2Config, nil)))
 	mux.Handle("/google/callback", google.StateHandler(stateConfig, google.CallbackHandler(oauth2Config, issueSession(), nil)))
 	return mux
@@ -96,12 +97,12 @@ func main() {
 	const address = "localhost:8080"
 	// read credentials from environment variables if available
 	config := &Config{
-		ClientID:     os.Getenv("GOOGLE_CLIENT_ID"),
-		ClientSecret: os.Getenv("GOOGLE_CLIENT_SECRET"),
+		ClientID:     "990650209650-tidphg8cnge229cd3888st5jhkfk1g73.apps.googleusercontent.com",
+		ClientSecret: "-sosFxmYeGyU-Pe6QutUvGlo",
 	}
 	// allow consumer credential flags to override config fields
-	clientID := flag.String("client-id", "", "Google Client ID")
-	clientSecret := flag.String("client-secret", "", "Google Client Secret")
+	clientID := flag.String("client-id", "", "990650209650-tidphg8cnge229cd3888st5jhkfk1g73.apps.googleusercontent.com")
+	clientSecret := flag.String("client-secret", "", "-sosFxmYeGyU-Pe6QutUvGlo")
 	flag.Parse()
 	if *clientID != "" {
 		config.ClientID = *clientID
