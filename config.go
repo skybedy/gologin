@@ -25,7 +25,7 @@ type CookieConfig struct {
 
 // DefaultCookieConfig configures short-lived temporary http.Cookie creation.
 var DefaultCookieConfig = CookieConfig{
-	Name:     "gologin-temporary-cookie",
+	Name:     "gologin-temporary-cookie-default",
 	Path:     "/",
 	MaxAge:   60, // 60 seconds
 	HTTPOnly: true,
@@ -36,7 +36,7 @@ var DefaultCookieConfig = CookieConfig{
 // http.Cookie's which do NOT require cookies be sent over HTTPS! Use this
 // config for development only.
 var DebugOnlyCookieConfig = CookieConfig{
-	Name:     "gologin-temporary-cookie",
+	Name:     "gologin-temporary-cookie-debug",
 	Path:     "/",
 	MaxAge:   60, // 60 seconds
 	HTTPOnly: true,

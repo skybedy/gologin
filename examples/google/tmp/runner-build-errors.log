@@ -1,0 +1,2 @@
+# github.com/dghubble/gologin/v2/examples/google
+.\main.go:41:2: googleOauth2Config declared but not used
